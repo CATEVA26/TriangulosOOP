@@ -9,6 +9,11 @@ public  class Triangulo implements Calculable{
         lados[1] = l2;
         lados[2] = l3;
         System.out.println(verificarTriangulo());
+        try {
+            esTrianguloValido(l1,l2,l3);
+        } catch (NoEsTrianguloValidoException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -23,6 +28,11 @@ public  class Triangulo implements Calculable{
         }
         return tipoTriangulo;
     }
+    public boolean esTrianguloValido(double lado1, double lado2, double lado3) throws NoEsTrianguloValidoException{
+        // Para formar un triángulo válido, la suma de las longitudes de cualesquiera dos lados debe ser mayor que la longitud del tercer lado.
+        return (lado1 + lado2 > lado3) && (lado1 + lado3 > lado2) && (lado2 + lado3 > lado1);
+    }
+
 
 
     @Override
