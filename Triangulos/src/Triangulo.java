@@ -1,4 +1,6 @@
-import java.lang.instrument.ClassDefinition;
+import Excepciones.LadoIgualACeroException;
+import Excepciones.NoEsTrianguloValidoException;
+import Excepciones.TrianguloConLadoNegativoException;
 
 public  class Triangulo implements Calculable{
     private double lados[];
