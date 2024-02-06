@@ -1,4 +1,6 @@
-import java.lang.instrument.ClassDefinition;
+import Excepciones.LadoIgualACeroException;
+import Excepciones.NoEsTrianguloValidoException;
+import Excepciones.TrianguloConLadoNegativoException;
 
 public  class Triangulo implements Calculable{
     private double lados[];
@@ -11,9 +13,33 @@ public  class Triangulo implements Calculable{
         System.out.println(verificarTriangulo());
         try {
             esTrianguloValido(l1,l2,l3);
+            tieneLadoNegativo();
+            tieneLadoIgualACero();
         } catch (NoEsTrianguloValidoException e) {
             throw new RuntimeException(e);
+        } catch (LadoIgualACeroException e) {
+            throw new RuntimeException(e);
+        } catch (TrianguloConLadoNegativoException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    private void tieneLadoIgualACero() throws LadoIgualACeroException {
+        //TODO: Verificar el metodo
+        for (Double lado:lados
+             ) {
+            if (lado==0)
+                throw new LadoIgualACeroException();
+        }
+    }
+
+    private void tieneLadoNegativo() throws TrianguloConLadoNegativoException {
+        for (Double lado:lados
+             ) {
+            if (lado<0)
+                throw new TrianguloConLadoNegativoException();
+        }
+
     }
 
 
@@ -28,9 +54,13 @@ public  class Triangulo implements Calculable{
         }
         return tipoTriangulo;
     }
-    public boolean esTrianguloValido(double lado1, double lado2, double lado3) throws NoEsTrianguloValidoException{
+    public void esTrianguloValido(double lado1, double lado2, double lado3) throws NoEsTrianguloValidoException{
         // Para formar un triángulo válido, la suma de las longitudes de cualesquiera dos lados debe ser mayor que la longitud del tercer lado.
-        return (lado1 + lado2 > lado3) && (lado1 + lado3 > lado2) && (lado2 + lado3 > lado1);
+        if((lado1 + lado2 > lado3) && (lado1 + lado3 > lado2) && (lado2 + lado3 > lado1)){
+
+        }else {
+            throw new NoEsTrianguloValidoException();
+        }
     }
 
 
